@@ -1,0 +1,40 @@
+<div class="orderListing">
+    <p><label class="boldText"> Shopping cart >> </label></p>
+    <md-input-container>
+        <md-checkbox ng-checked="exists('open', selected)" ng-click="toggle('open', selected)">
+            open orders
+        </md-checkbox>
+        <md-checkbox ng-checked="exists('submitted', selected)" ng-click="toggle('submitted', selected)">
+            submitted orders
+        </md-checkbox>
+        <md-checkbox ng-checked="exists('deleted', selected)" ng-click="toggle('deleted', selected)">
+            deleted orders
+        </md-checkbox>
+    </md-input-container>
+
+    <div ng-repeat="order in orders | filter: filterArray">
+        <md-toolbar layout="row" class="md-hue-3 fixOrderToolBarMaxHeight">
+            <div class="md-toolbar-tools">
+                <span>Order {{$index+1}} - {{ order._id }}</span>
+            </div>
+            <md-button ng-if="order.orderStatus == 'open'" ng-click="deleteOrder(order._id,$event)" class="md-raised md-warn">Delete</md-button>
+        </md-toolbar>
+        <md-content>
+            <md-list class="md-dense" flex>
+                <md-list-item class="md-3-line" layout-padding>
+                    <div class="md-list-item-text" layout="column">
+                        <h3>Payment mode: {{ order.paymentMethod }}</h3>
+                        <h3>Items in order</h3>
+                        <h4 class="sidebarPadLeft" ng-repeat="ing in order.ingredients">{{ ing.name }}</h4>
+                        <h4>Supermarket: {{ order.marketId }}</h4>
+                        <h4>Cost: ${{ order.cost | number:2}}</h4>
+                        <h4>Status: {{ order.orderStatus }}</h4>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+        </md-content>
+    </div>
+
+    <div ng-if="enableCheckout" align="right"><md-button href="/#/checkout" class="md-raised md-primary" ng-click="processOrder()">Checkout</md-button></div>
+</div>

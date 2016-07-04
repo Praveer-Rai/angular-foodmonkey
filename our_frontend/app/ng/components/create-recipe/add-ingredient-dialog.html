@@ -1,0 +1,45 @@
+<md-dialog ng-controller="CreateRecipeCtrl" aria-label="Add Ingredient to Recipe"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Add Ingredient to Recipe</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancelDialog()">
+                    <md-icon md-svg-src="icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-autocomplete flex required
+                                 md-input-name="autocompleteField"
+                                 md-input-minlength="2"
+                                 md-input-maxlength="18"
+                                 md-no-cache="noCache"
+                                 md-selected-item="selectedItem"
+                                 md-search-text="searchText"
+                                 md-items="item in querySearch(searchText)"
+                                 md-item-text="item.display"
+                                 md-floating-label="Name">
+                    <md-item-template>
+                        <span md-highlight-text="searchText">{{item.display}}</span>
+                    </md-item-template>
+
+                </md-autocomplete>
+                <md-input-container >
+                    <label>Quantity</label>
+                    <input ng-model="quantity">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancelDialog()">
+                Cancel
+            </md-button>
+            <md-button ng-click="addNewIngredient()">
+                Add Ingredient
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,19 @@
+<img class="md-card-image recipe-card-img" layout-padding ng-src="{{recipe.thumbnailImageId}}"/>
+<md-card-title>
+    <md-card-title-text>
+        <span class="md-headline">{{recipe.title}}</span>
+        <p><jk-rating-stars rating="recipe.rating" read-only="true" layout-wrap></jk-rating-stars></p>
+    </md-card-title-text>
+</md-card-title>
+<md-card-content>
+    Date: {{recipe.createdOn | date}} | by {{recipe.user.username}}
+</md-card-content>
+<md-card-actions layout="row" layout-align="end center">
+    <md-button class="md-ink-ripple md-accent" ui-sref="recipes.detail({recipeId: recipe._id})">
+        Details
+    </md-button>
+</md-card-actions>
+
+
+
+
